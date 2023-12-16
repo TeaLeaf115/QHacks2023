@@ -11,6 +11,11 @@ class App:
         display_info = pygame.display.Info()
         self.width, self.height = display_info.current_w, display_info.current_h
         self.resolution = self.width, self.height
+
+        self.screen = pygame.display.set_mode(
+            self.resolution,
+            pygame.DOUBLEBUF
+        )
         
         self.clock = pygame.time.Clock()
         self.runtime = True
@@ -19,10 +24,11 @@ class App:
     def run(self):
 
         while self.runtime:
+            for event in pygame.events.get():
+                pass
 
             self.draw()
             self.update()
-
 
             # updates screen
             pygame.display.update()
