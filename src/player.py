@@ -53,6 +53,5 @@ class Player(Entity):
             self.aciton = 'run'
 
     def update(self):
-        print(self.frame)
         self.movement()
         self.animation()

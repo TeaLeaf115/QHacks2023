@@ -50,5 +50,6 @@ class Entity(Sprite):
 
     def update(self):
         self.movement()
+        self.animation()
 
     
