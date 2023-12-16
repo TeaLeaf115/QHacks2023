@@ -28,7 +28,7 @@ class App:
 
         # groups
         self.camera_group = CameraGroup()
-        self.player = Player((400, 400), (TILE_SIZE, ) * 2, self, self.camera_group)
+        self.player = Player((400, 400), (TILE_SIZE * 2, ) * 2, self, self.camera_group)
         
     def run(self):
         while self.runtime:
@@ -54,10 +54,9 @@ class App:
         pygame.quit()
 
     def draw(self):
-        self.screen.fill(Color.RED)
+        self.screen.fill(Color.BLACK)
         self.camera_group.render()
-        for image in IMAGES.values():
-            self.screen.blit(image, (100, 100))
+        
         
 
     def update(self):

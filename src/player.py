@@ -8,6 +8,7 @@ class Player(Entity):
         super().__init__(coords, size, game, groups)
 
         self.max_velocity = 10
+        self.jumping = False
 
         # animation
         self.animation_cooldowns = {
@@ -27,18 +28,28 @@ class Player(Entity):
         keys = pygame.key.get_pressed()
         left = keys[pygame.K_a]
         right = keys[pygame.K_d]
-        down = keys[pygame.K_s]
-        up = keys[pygame.K_w]
 
-        self.acceleration.xy = right - left, down - up
+        space = keys[pygame.K_SPACE]
 
-        if self.acceleration:
-            self.acceleration.scale_to_length(self.max_velocity)
-            self.velocity += self.acceleration
-            self.velocity *= 0.5
+        self.acceleration.x = right - left
+
+        if self.acceleration.x:
+            self.acceleration.x *= self.max_velocity
+            self.velocity.x += self.acceleration.x
+            self.velocity.x *= 0.5
 
         else:
-            self.velocity *= 0.9
+            self.velocity.x *= 0.9
+
+        if space:
+            self.velocity.y = -20
+
+        ground_y = self.game.height * 2 / 3
+        if self.coords.y < ground_y:
+            self.velocity.y += 2
+        
+        if self.coords.y > ground_y:
+            self.coords.y = ground_y
 
         super().movement()
 
@@ -46,12 +57,13 @@ class Player(Entity):
         pass
 
     def check_state(self):
-        if self.velocity.magnitude() > 2:
+        if abs(self.velocity.x) > self.max_velocity * 2 / 3:
             self.action = 'dash'
 
         else:
-            self.aciton = 'run'
+            self.action = 'run'
 
     def update(self):
         self.movement()
+        self.check_state()
         self.animation()
