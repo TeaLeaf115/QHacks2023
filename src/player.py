@@ -7,7 +7,7 @@ class Player(Entity):
     def __init__(self, coords: tuple, size: tuple, game, groups):
         super().__init__(coords, size, game, groups)
 
-        self.max_velocity = 20
+        self.max_velocity = 10
 
         # animation
         self.animation_cooldowns = {
@@ -19,6 +19,9 @@ class Player(Entity):
             action: self.get_images(f'player/{action}', isFolder=True) 
             for action in self.animation_cooldowns
         }
+
+        self.image = self.animation_frames[self.action][self.frame]
+        
 
     def movement(self):
         keys = pygame.key.get_pressed()
@@ -42,6 +45,14 @@ class Player(Entity):
     def collision(self):
         pass
 
+    def check_state(self):
+        if self.velocity.magnitude() > 2:
+            self.action = 'dash'
+
+        else:
+            self.aciton = 'run'
+
     def update(self):
+        print(self.frame)
         self.movement()
         self.animation()

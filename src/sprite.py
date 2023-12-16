@@ -36,7 +36,7 @@ class Sprite(pygame.sprite.Sprite):
                     self.size
                 )
 
-            images.append(image)
+                images.append(image)
 
         else:
             image = IMAGES[filepath].copy()

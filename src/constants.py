@@ -4,6 +4,7 @@ import pygame
 import os
 
 pygame.init()
+pygame.display.init()
 pygame.display.set_mode()
 
 # tile pixel size

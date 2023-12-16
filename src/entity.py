@@ -1,7 +1,6 @@
 from sprite import Sprite
 
 import pygame
-import math
 
 
 class Entity(Sprite):
@@ -34,11 +33,7 @@ class Entity(Sprite):
         pass
 
     def check_state(self):
-        if self.velocity.magnitude() > 2:
-            self.action = 'dash'
-
-        else:
-            self.aciton = 'run'
+        pass
 
     def animation(self):
         if self.frame >= len(self.animation_frames[self.action]):
@@ -49,9 +44,9 @@ class Entity(Sprite):
 
             # determines whether the animation cooldown is over
             if pygame.time.get_ticks() - self.animation_time > self.animation_cooldowns[self.action]:
-
                 self.animation_time = pygame.time.get_ticks()
                 self.frame += 1
+        
 
     def update(self):
         self.movement()
