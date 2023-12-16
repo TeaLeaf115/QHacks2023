@@ -28,6 +28,7 @@ class App:
         # groups
         self.camera_group = CameraGroup()
         self.bsod = Sprite((0, 0), self.resolution, self, self.camera_group)
+        self.bsod.get_images('bsod')
         
     def run(self):
         while self.runtime:
@@ -54,7 +55,7 @@ class App:
 
     def draw(self):
         self.screen.fill(Color.BLUE)
-        #self.screen.blit(self.bsod, self.bsod.coord)
+        self.screen.blit(self.bsod.image, self.bsod.coords)
 
     def update(self):
         pass
