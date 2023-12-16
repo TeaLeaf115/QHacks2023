@@ -1,7 +1,9 @@
+from constants import *
+
 import pygame
 
 class Sprite(pygame.sprite.Sprite):
-    def __init_(self, coords: tuple, size: tuple, groups: pygame.sprite.Group, game):
+    def __init_(self, coords: tuple, size: tuple, game, groups):
         super().__init__()
         self.game = game
 
@@ -18,3 +20,8 @@ class Sprite(pygame.sprite.Sprite):
         # animation
         self.frame = 0
     
+    def get_images(self, filepath: str):
+        self.image = pygame.transform(
+            IMAGES[filepath].copy(), 
+            self.size
+        )
