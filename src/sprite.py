@@ -2,8 +2,9 @@ from constants import *
 
 import pygame
 
+
 class Sprite(pygame.sprite.Sprite):
-    def __init_(self, coords: tuple, size: tuple, game, groups):
+    def __init__(self, coords: tuple, size: tuple, game, groups):
         super().__init__()
         self.game = game
 
@@ -12,16 +13,17 @@ class Sprite(pygame.sprite.Sprite):
 
         # images and rects
         self.image = pygame.Surface(size)
-        self.rect = self.image.getRect(topleft=coords)
+        self.rect = self.image.get_rect(topleft=coords)
 
         # render
         self.sprite_layer = 0
 
         # animation
         self.frame = 0
-    
+
     def get_images(self, filepath: str):
-        self.image = pygame.transform(
-            IMAGES[filepath].copy(), 
+        self.image = IMAGES[filepath].copy()
+        self.image = pygame.transform.scale(
+            self.image, 
             self.size
         )

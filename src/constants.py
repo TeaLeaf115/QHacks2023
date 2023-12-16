@@ -10,7 +10,7 @@ pygame.display.set_mode()
 TILE_SIZE = 100
 
 # file paths
-SPRITE_PATH = '../images'
+SPRITE_PATH = '../res'
 
 # retrieving image files for tooltips
 IMAGES = {}
