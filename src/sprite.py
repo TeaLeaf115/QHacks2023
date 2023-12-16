@@ -13,6 +13,7 @@ class Sprite(pygame.sprite.Sprite):
 
         # images and rects
         self.image = pygame.Surface(size)
+        self.image.fill(Color.BLUE)
         self.rect = self.image.get_rect(topleft=coords)
 
         # render
@@ -29,25 +30,26 @@ class Sprite(pygame.sprite.Sprite):
             filepaths.sort(key=lambda filename: (len(filename), filename))
 
             for path in filepaths:
-                file_name, extension = path.split('.')
-                image = IMAGES[file_name].copy()
+                filename = path[:-4].split('/')[-1]
+                image = IMAGES[filename].copy()
                 image = pygame.transform.scale(
-                    self.image, 
+                    image,
                     self.size
                 )
 
                 images.append(image)
 
         else:
-            image = IMAGES[filepath].copy()
-            image = pygame.transform.scale(
-                self.image, 
-                self.size
-            )
+           # filepath is a single image instead of a sprite folder
+            filename = filepath.split('/')[-1]
+            image = IMAGES[filename].copy()
+            image = pygame.transform.scale(image, self.size)
 
             images.append(image)
 
         return images
+    
+        
 
     def update(self):
         pass

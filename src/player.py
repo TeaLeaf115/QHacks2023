@@ -46,12 +46,13 @@ class Player(Entity):
         pass
 
     def check_state(self):
-        if self.velocity.magnitude() > 2:
+        if self.velocity.magnitude() == self.max_velocity:
             self.action = 'dash'
 
         else:
-            self.aciton = 'run'
+            self.action = 'run'
 
     def update(self):
         self.movement()
+        self.check_state()
         self.animation()
