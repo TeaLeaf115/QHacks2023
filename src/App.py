@@ -1,3 +1,7 @@
+from constants import *
+from sprite import Sprite
+from camera_group import CameraGroup
+
 import pygame
 
 
@@ -21,8 +25,11 @@ class App:
         self.clock = pygame.time.Clock()
         self.runtime = True
 
+        # groups
+        self.camera_group = CameraGroup()
+        self.bsod = Sprite((0, 0), self.resolution, self, self.camera_group)
+        
     def run(self):
-
         while self.runtime:
             events = pygame.event.get()
             for event in events:
@@ -46,7 +53,8 @@ class App:
         pygame.quit()
 
     def draw(self):
-        pass
+        self.screen.fill(Color.BLUE)
+        #self.screen.blit(self.bsod, self.bsod.coord)
 
     def update(self):
         pass

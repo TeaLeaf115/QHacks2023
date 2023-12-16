@@ -4,8 +4,8 @@ import pygame
 
 
 class Entity(Sprite):
-    def __init__(self, coords: tuple, size: tuple, groups: pygame.sprite.Group, game):
-        super.__init__(coords, size, groups, game)
+    def __init__(self, coords: tuple, size: tuple, game, groups):
+        super().__init__(coords, size, game, groups)
 
     def movement(self):
         pass
