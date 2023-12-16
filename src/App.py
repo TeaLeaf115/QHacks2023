@@ -28,7 +28,8 @@ class App:
 
         # groups
         self.camera_group = CameraGroup()
-        self.player = Player((400, 400), (TILE_SIZE * 2, ) * 2, self, self.camera_group)
+        for i in range(1):
+            Player((300 + i, 400), (TILE_SIZE * 2, ) * 2, self, self.camera_group)
         
     def run(self):
         while self.runtime:

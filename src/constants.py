@@ -1,7 +1,9 @@
 from color import Color
 
 import pygame
+import math
 import os
+
 
 pygame.init()
 pygame.display.init()
@@ -22,3 +24,13 @@ for (path, dirs, files) in os.walk(SPRITE_PATH, topdown=True):
             IMAGES[file_name] = pygame.image.load(
                 os.path.join(path, file)
             ).convert_alpha()
+
+# physics
+gravity_acceleration = 0.5
+
+
+def signum(num):
+    if num == 0:
+        return 0
+    
+    return math.copysign(1, num)
