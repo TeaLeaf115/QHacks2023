@@ -1,6 +1,7 @@
 from sprite import Sprite
 
 import pygame
+import math
 
 
 class Entity(Sprite):
@@ -10,6 +11,7 @@ class Entity(Sprite):
 
         self.velocity = pygame.math.Vector2()
         self.acceleration = pygame.math.Vector2()
+        self.max_velocity = 0
 
         self.animation_cooldowns = {
             'run': 100,
@@ -20,7 +22,13 @@ class Entity(Sprite):
         self.animation_time = pygame.time.get_ticks()
 
     def movement(self):
-        self.velocity += self.acceleration
+        if abs(self.velocity.x) < self.max_velocity / 25:
+            self.velocity.x = 0
+
+        if abs(self.velocity.y) < self.max_velocity / 25:
+            self.velocity.y = 0
+
+        self.coords += self.velocity
 
     def collision(self):
         pass
@@ -37,11 +45,10 @@ class Entity(Sprite):
             self.frame = 0
         
         if self.frame < len(self.animation_frames[self.action]):
-            self.image = self.animation_frames[self.frame]
+            self.image = self.animation_frames[self.action][self.frame]
 
             # determines whether the animation cooldown is over
-            if (self.animation_cooldown
-                    and pygame.time.get_ticks() - self.animation_time > self.animation_cooldown[self.action]):
+            if pygame.time.get_ticks() - self.animation_time > self.animation_cooldowns[self.action]:
 
                 self.animation_time = pygame.time.get_ticks()
                 self.frame += 1

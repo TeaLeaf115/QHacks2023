@@ -27,8 +27,7 @@ class App:
 
         # groups
         self.camera_group = CameraGroup()
-        self.player = Player((400, 400), (TILE_SIZE * 100, ) * 2, self, self.camera_group)
-        self.player.get_images('bsod')
+        self.player = Player((400, 400), (TILE_SIZE, ) * 2, self, self.camera_group)
         
     def run(self):
         while self.runtime:

@@ -29,7 +29,8 @@ class Sprite(pygame.sprite.Sprite):
             filepaths.sort(key=lambda filename: (len(filename), filename))
 
             for path in filepaths:
-                image = IMAGES[filepath].copy()
+                file_name, extension = path.split('.')
+                image = IMAGES[file_name].copy()
                 image = pygame.transform.scale(
                     self.image, 
                     self.size
