@@ -1,5 +1,6 @@
 from constants import *
 from player import Player
+from sprite import Sprite
 from camera_group import CameraGroup
 
 import pygame
@@ -27,8 +28,9 @@ class App:
 
         # groups
         self.camera_group = CameraGroup()
-        self.player = Player((400, 400), (TILE_SIZE * 100, ) * 2, self, self.camera_group)
-        self.player.get_images('bsod')
+        self.player = Player((400, 400), (TILE_SIZE, ) * 2, self, self.camera_group)
+        bsod = Sprite((100, 100), (TILE_SIZE, ) * 2, self, self.camera_group)
+        bsod.image = bsod.get_images('bsod')[0]
         
     def run(self):
         while self.runtime:
@@ -55,8 +57,10 @@ class App:
 
     def draw(self):
         self.screen.fill(Color.RED)
-
         self.camera_group.render()
+        for image in self.player.animation_frames['run']:
+            self.screen.blit(image, (100, 100))
+        
 
     def update(self):
         self.camera_group.update()

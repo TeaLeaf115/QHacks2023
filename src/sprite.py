@@ -21,12 +21,33 @@ class Sprite(pygame.sprite.Sprite):
         # animation
         self.frame = 0
 
-    def get_images(self, filepath: str):
-        self.image = IMAGES[filepath].copy()
-        self.image = pygame.transform.scale(
-            self.image, 
-            self.size
-        )
+    def get_images(self, filepath: str, isFolder=False):
+        images = []
+        if isFolder:
+            # sorts filenames by length and then alphabetically
+            filepaths = os.listdir(f'{SPRITE_PATH}/{filepath}')
+            filepaths.sort(key=lambda filename: (len(filename), filename))
+
+            for path in filepaths:
+                file_name, extension = path.split('.')
+                image = IMAGES[file_name].copy()
+                image = pygame.transform.scale(
+                    self.image, 
+                    self.size
+                )
+
+                images.append(image)
+
+        else:
+            image = IMAGES[filepath].copy()
+            image = pygame.transform.scale(
+                self.image, 
+                self.size
+            )
+
+            images.append(image)
+
+        return images
 
     def update(self):
         pass
