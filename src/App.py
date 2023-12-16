@@ -1,5 +1,5 @@
 from constants import *
-from sprite import Sprite
+from player import Player
 from camera_group import CameraGroup
 
 import pygame
@@ -27,8 +27,8 @@ class App:
 
         # groups
         self.camera_group = CameraGroup()
-        self.bsod = Sprite((0, 0), self.resolution, self, self.camera_group)
-        self.bsod.get_images('bsod')
+        self.player = Player((400, 400), (TILE_SIZE * 100, ) * 2, self, self.camera_group)
+        self.player.get_images('bsod')
         
     def run(self):
         while self.runtime:
@@ -54,11 +54,12 @@ class App:
         pygame.quit()
 
     def draw(self):
-        self.screen.fill(Color.BLUE)
-        self.screen.blit(self.bsod.image, self.bsod.coords)
+        self.screen.fill(Color.RED)
+
+        self.camera_group.render()
 
     def update(self):
-        pass
+        self.camera_group.update()
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ import pygame
 
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, coords: tuple, size: tuple, game, groups):
-        super().__init__()
+        super().__init__(groups)
         self.game = game
 
         self.coords = pygame.math.Vector2(*coords)
@@ -27,3 +27,6 @@ class Sprite(pygame.sprite.Sprite):
             self.image, 
             self.size
         )
+
+    def update(self):
+        pass
