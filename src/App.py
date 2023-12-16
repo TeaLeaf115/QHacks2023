@@ -29,8 +29,6 @@ class App:
         # groups
         self.camera_group = CameraGroup()
         self.player = Player((400, 400), (TILE_SIZE, ) * 2, self, self.camera_group)
-        bsod = Sprite((100, 100), (TILE_SIZE, ) * 2, self, self.camera_group)
-        bsod.image = bsod.get_images('bsod')[0]
         
     def run(self):
         while self.runtime:
@@ -58,7 +56,7 @@ class App:
     def draw(self):
         self.screen.fill(Color.RED)
         self.camera_group.render()
-        for image in self.player.animation_frames['run']:
+        for image in IMAGES.values():
             self.screen.blit(image, (100, 100))
         
 
