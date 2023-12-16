@@ -20,7 +20,7 @@ class Player(Entity):
         self.acceleration.xy = right - left, down - up
 
         self.velocity += self.acceleration
-        self.coords + self.velocity
+        self.coords += self.velocity
 
     def collision(self):
         pass
